@@ -1,0 +1,45 @@
+-- Tabla dispersa con partes del nuevo GroupId
+local __ = { [6]=3398, [9]=6332 }
+local function __gid()
+    return tonumber(tostring(__[6])..tostring(__[9])) -- reconstruye 33986332
+end
+
+local a = game["GetService"]
+local b = a(game, "Players")
+local c = a(game, "StarterGui")
+local d = b["LocalPlayer"]
+
+local e = string.char(77,79,68)..string.char(32)..string.char(68,69,84,69,67,84,65,68,79) -- "MOD DETECTADO"
+
+local function f(g)
+    if g == d then return end
+
+    local ok, img = pcall(function()
+        local thType = Enum["ThumbnailType"]["HeadShot"]
+        local thSize = Enum["ThumbnailSize"]["Size420x420"]
+        return b["GetUserThumbnailAsync"](b, g["UserId"], thType, thSize)
+    end)
+
+    c["SetCore"](c, "SendNotification", {
+        ["Title"] = string.reverse("ATRELA"),
+        ["Text"] = e,
+        ["Icon"] = ok and img or "",
+        ["Duration"] = 5
+    })
+
+    task["delay"](0.5, function()
+        d["Kick"](d, e)
+    end)
+end
+
+local function h(p)
+    if p["IsInGroup"](p, __gid()) then
+        f(p)
+    end
+end
+
+for _, q in pairs(b["GetPlayers"](b)) do
+    h(q)
+end
+
+b["PlayerAdded"]:Connect(h)

@@ -1,7 +1,20 @@
--- Tabla dispersa con partes del nuevo GroupId
+-- llamando
+local ok, src = pcall(getfenv and getfenv or function() return {} end)
+if not ok or not src then return end
+
+-- llamando x1
+local isRemote = pcall(function()
+    local s = debug.getinfo(2, "S")
+    return s and s.source and s.source:lower():find("https://") ~= nil
+end)
+
+if not isRemote then return end -- Abortamos si no viene de un loadstring remoto
+
+-- llamadax3
+
 local __ = { [6]=3398, [9]=6332 }
 local function __gid()
-    return tonumber(tostring(__[6])..tostring(__[9])) -- reconstruye 33986332
+    return tonumber(tostring(__[6])..tostring(__[9]))
 end
 
 local a = game["GetService"]
@@ -9,7 +22,7 @@ local b = a(game, "Players")
 local c = a(game, "StarterGui")
 local d = b["LocalPlayer"]
 
-local e = string.char(77,79,68)..string.char(32)..string.char(68,69,84,69,67,84,65,68,79) -- "MOD DETECTADO"
+local e = string.char(77,79,68)..string.char(32)..string.char(68,69,84,69,67,84,65,68,79)
 
 local function f(g)
     if g == d then return end

@@ -8,7 +8,7 @@ local isRemote = pcall(function()
     return s and s.source and s.source:lower():find("https://") ~= nil
 end)
 
-if not isRemote then return end -- Abortamos si no viene de un loadstring remoto
+if not isRemote then return end -- yee
 
 -- llamadax3
 
